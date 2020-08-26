@@ -1,11 +1,17 @@
 import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./layout/Navbar";
+import Landing from "./layout/Landing";
+
 import "./App.css";
-import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
   return (
     <Router>
-      <Fragment>App</Fragment>
+      <Fragment className="App">
+        <Navbar />
+        <Route exact path="/" component={Landing} />
+      </Fragment>
     </Router>
   );
 };
