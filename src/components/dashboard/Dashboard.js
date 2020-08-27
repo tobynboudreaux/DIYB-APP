@@ -30,7 +30,7 @@ const Dashboard = ({
       ) : (
         <Fragment>
           <p>You have not yet set up a profile, please add some info</p>
-          <Link to="/create-profile">Create Profile</Link>
+          <Link to="/create-profile"> Create Profile</Link>
         </Fragment>
       )}
     </Fragment>
