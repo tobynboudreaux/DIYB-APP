@@ -7,6 +7,9 @@ const DashboardActions = () => {
       <Link to="/edit-profile">
         <i className="fas fa-user-circle"></i> Edit Profile
       </Link>
+      <Link to="/add-board">
+        <i className="fas fa-user-circle"></i> Add a Board
+      </Link>
     </div>
   );
 };
