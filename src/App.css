@@ -1,3 +1,60 @@
-.App {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+  color: #333;
+}
+
+a {
+  color: #17a2b8;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+/* Navbar */
+.navbar {
+  display: block;
   text-align: center;
+}
+
+.navbar ul {
+  text-align: center;
+  justify-content: center;
+}
+
+.navbar a {
+  display: block;
+  padding: 8px;
+  background-color: #dddddd;
+}
+
+.navbar li {
+  float: right;
+}
+
+.navbar h1 {
+  margin-bottom: 1rem;
+}
+
+.navbar .welcome {
+  display: none;
+}
+
+/* Mobile Styles */
+.hide-sm {
+  display: none;
 }
