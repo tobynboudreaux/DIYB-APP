@@ -25,6 +25,17 @@ img {
   width: 100%;
 }
 
+/* Profiles */
+.profile {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  align-items: center;
+  grid-gap: 2rem;
+  padding: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
 /* Navbar */
 .navbar {
   display: block;
@@ -52,6 +63,10 @@ img {
 
 .navbar .welcome {
   display: none;
+}
+
+.round-img {
+  border-radius: 50%;
 }
 
 /* Mobile Styles */

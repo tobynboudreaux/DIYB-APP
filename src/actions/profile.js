@@ -3,6 +3,7 @@ import { setAlert } from "./alert";
 
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   CLEAR_PROFILE,
@@ -13,6 +14,42 @@ import {
 export const getCurrentProfile = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/profile/me");
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get all Profiles
+export const getProfiles = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+
+  try {
+    const res = await axios.get("/api/profile");
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get Profile By Id
+export const getProfileById = (userID) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userID}`);
 
     dispatch({
       type: GET_PROFILE,
@@ -115,11 +152,53 @@ export const deleteBoard = (id) => async (dispatch) => {
   }
 };
 
+// Add post to board
+export const addPostToBoard = (boardID, postID, history) => async (
+  dispatch
+) => {
+  try {
+    const res = await axios.put(`/api/profile/boards/${boardID}/${postID}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Post Added To Board", "success"));
+
+    history.push("/dashboard");
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Delete Post from board
+export const deletePostFromBoard = (boardID, postID) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/profile/boards/${boardID}/${postID}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Post Removed from Board", "success"));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 // Delete account and profile
 export const deleteAccount = () => async (dispatch) => {
   if (window.confirm("Are you sure? This can NOT be undone")) {
     try {
-      const res = await axios.delete(`/api/profile`);
+      await axios.delete(`/api/profile`);
 
       dispatch({
         type: CLEAR_PROFILE,

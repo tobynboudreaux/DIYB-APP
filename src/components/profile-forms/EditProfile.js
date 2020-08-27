@@ -42,7 +42,17 @@ const EditProfile = ({
       youtube: loading || !profile.social ? "" : profile.social.youtube,
       instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [loading]);
+  }, [
+    loading,
+    getCurrentProfile,
+    profile.occupation,
+    profile.website,
+    profile.location,
+    profile.bio,
+    profile.status,
+    profile.skills,
+    profile.social,
+  ]);
 
   const {
     occupation,
