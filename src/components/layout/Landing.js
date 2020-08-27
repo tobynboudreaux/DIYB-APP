@@ -13,12 +13,8 @@ const Landing = () => {
             soul into.{" "}
           </p>
           <div>
-            <Link to="/register" className="btn btn-primary">
-              Sign Up
-            </Link>
-            <Link to="/login" className="btn btn-light">
-              Login
-            </Link>
+            <Link to="/register">Sign Up</Link>
+            <Link to="/login">Login</Link>
           </div>
         </div>
       </div>
