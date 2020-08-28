@@ -18,7 +18,9 @@ const ProfileItem = ({
         <p>{status}</p>
         <p>{occupation}</p>
         <p>{location}</p>
-        <Link to={`/profile/${_id}`}>View Profile</Link>
+        <Link to={`/profile/${_id}`}>
+          <i class="fas fa-arrow-alt-circle-right"></i> View Profile
+        </Link>
       </div>
       <ul>
         {skills.slice(0, 4).map((skill, index) => (

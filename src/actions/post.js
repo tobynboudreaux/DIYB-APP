@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from "./types";
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, POST_DELETED } from "./types";
 
 // Get posts
 export const getPosts = () => async (dispatch) => {
@@ -45,6 +45,25 @@ export const unLike = (postID) => async (dispatch) => {
       type: UPDATE_LIKES,
       payload: { postID, likes: res.data },
     });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Delete post
+export const deletePost = (postID) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/posts/${postID}`);
+
+    dispatch({
+      type: POST_DELETED,
+      payload: postID,
+    });
+
+    dispatch(setAlert("Post Removed", "succes"));
   } catch (err) {
     dispatch({
       type: POST_ERROR,
