@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
@@ -11,6 +11,7 @@ const PostItem = ({
   deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date },
+  showActions,
 }) => {
   return (
     <div>
@@ -26,24 +27,32 @@ const PostItem = ({
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
         {/* Add to board form */}
-        <button onClick={(e) => addLike(_id)}>
-          <i className="fas fa-thumbs-up" />
-          {likes.length > 0 && <span>{likes.length}</span>}
-        </button>
-        <button onClick={(e) => unLike(_id)}>
-          <i className="fas fa-thumbs-down" />
-        </button>
-        <Link to={`/post/${_id}`}>
-          Discussion {comments.length > 0 && <span>{comments.length}</span>}
-        </Link>
-        {!auth.loading && user === auth.user._id && (
-          <button onClick={(e) => deletePost(_id)}>
-            <i className="fas fa-times" />
-          </button>
+        {showActions && (
+          <Fragment>
+            <button onClick={(e) => addLike(_id)}>
+              <i className="fas fa-thumbs-up" />
+              {likes.length > 0 && <span>{likes.length}</span>}
+            </button>
+            <button onClick={(e) => unLike(_id)}>
+              <i className="fas fa-thumbs-down" />
+            </button>
+            <Link to={`/posts/${_id}`}>
+              Discussion {comments.length > 0 && <span>{comments.length}</span>}
+            </Link>
+            {!auth.loading && user === auth.user._id && (
+              <button onClick={(e) => deletePost(_id)}>
+                <i className="fas fa-times" />
+              </button>
+            )}
+          </Fragment>
         )}
       </div>
     </div>
   );
+};
+
+PostItem.defaultProps = {
+  showActions: true,
 };
 
 PostItem.propTypes = {
