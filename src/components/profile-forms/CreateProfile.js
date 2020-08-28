@@ -60,9 +60,7 @@ const CreateProfile = ({ createProfile, history }) => {
             value={status}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">
-            Give us an idea of where you are at in your career
-          </small>
+          <small className="form-text">How are you feeling today? </small>
         </div>
         <div className="form-group">
           <input
@@ -72,9 +70,7 @@ const CreateProfile = ({ createProfile, history }) => {
             value={occupation}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">
-            Could be your own occupation or one you work for
-          </small>
+          <small className="form-text">What do you do for a living? </small>
         </div>
         <div className="form-group">
           <input

@@ -10,8 +10,8 @@ const Landing = ({ isAuthenticated }) => {
 
   return (
     <section className="landing">
-      <div>
-        <div>
+      <div className="dark-overlay">
+        <div className="landing-inner">
           <h1> DIY-B </h1>
           <p>
             Do It Yourself-Bookshelf allows you to share DIY Recipes with fellow

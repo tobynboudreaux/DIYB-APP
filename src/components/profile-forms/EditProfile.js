@@ -93,9 +93,7 @@ const EditProfile = ({
             value={status}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">
-            Give us an idea of where you are at in your career
-          </small>
+          <small className="form-text">How are you feeling today? </small>
         </div>
         <div className="form-group">
           <input
@@ -105,9 +103,7 @@ const EditProfile = ({
             value={occupation}
             onChange={(e) => onChange(e)}
           />
-          <small className="form-text">
-            Could be your own occupation or one you work for
-          </small>
+          <small className="form-text">What do you do for a living? </small>
         </div>
         <div className="form-group">
           <input
@@ -145,12 +141,7 @@ const EditProfile = ({
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
           </small>
         </div>
-        <div className="form-group">
-          <small className="form-text">
-            If you want your latest repos and a Github link, include your
-            username
-          </small>
-        </div>
+
         <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"

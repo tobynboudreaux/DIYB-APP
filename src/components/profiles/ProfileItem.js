@@ -11,7 +11,7 @@ const ProfileItem = ({
   },
 }) => {
   return (
-    <div className="profile">
+    <div key={_id} className="profile">
       <img src={avatar} alt="" className="round-img"></img>
       <div>
         <h2>{name}</h2>
