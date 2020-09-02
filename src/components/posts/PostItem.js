@@ -1,49 +1,78 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { addLike, unLike, deletePost } from "../../actions/post";
+import AddToBoard from "./AddToBoard";
+import AddInstructions from "./AddInstructions";
+import Spinner from "../layout/Spinner";
 
 const PostItem = ({
   addLike,
   unLike,
   deletePost,
   auth,
-  post: { _id, text, name, avatar, user, likes, comments, date },
+  post: { loading, _id, text, name, avatar, user, likes, comments, date },
   showActions,
+  profile,
 }) => {
-  return (
-    <div>
+  const [showInst, toggleInst] = useState(false);
+
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div className="post p-1 my-1">
       <div>
-        <Link to="/profile">
+        <Link to={`/profile/${user}`}>
           <img className="round-img" src={avatar} alt={name} />
           <h4>{name}</h4>
         </Link>
       </div>
       <div>
-        <p>{text}</p>
-        <p>
+        <p className="my-1">{text}</p>
+        <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
-        {/* Add to board form */}
         {showActions && (
           <Fragment>
-            <button onClick={(e) => addLike(_id)}>
+            <button className="btn btn-light" onClick={(e) => addLike(_id)}>
               <i className="fas fa-thumbs-up" />
-              {likes.length > 0 && <span>{likes.length}</span>}
+              {likes.length > 0 && <span text-light>{likes.length}</span>}
             </button>
-            <button onClick={(e) => unLike(_id)}>
+            <button className="btn btn-light" onClick={(e) => unLike(_id)}>
               <i className="fas fa-thumbs-down" />
             </button>
-            <Link to={`/posts/${_id}`}>
-              Discussion {comments.length > 0 && <span>{comments.length}</span>}
+            <Link to={`/posts/${_id}`} className="btn btn-primary">
+              Discussion{" "}
+              {comments.length > 0 && (
+                <span className="comment-count">{comments.length}</span>
+              )}
             </Link>
-            {!auth.loading && user === auth.user._id && (
-              <button onClick={(e) => deletePost(_id)}>
-                <i className="fas fa-times" />
-              </button>
-            )}
+            <div className="button-line">
+              {profile === null ? (
+                ""
+              ) : (
+                <AddToBoard boards={profile.boards} post={_id} />
+              )}
+              {!auth.loading && user === auth.user._id && (
+                <div>
+                  <button
+                    onClick={(e) => toggleInst(!showInst)}
+                    className="btn btn-primary"
+                  >
+                    Add Instructions
+                  </button>
+                  {showInst && <AddInstructions postID={_id} />}
+                  <button
+                    onClick={(e) => deletePost(_id)}
+                    className="btn btn-danger"
+                  >
+                    <i className="fas fa-times" />
+                  </button>
+                </div>
+              )}
+            </div>
           </Fragment>
         )}
       </div>
@@ -67,6 +96,8 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLike, unLike, deletePost })(
-  PostItem
-);
+export default connect(mapStateToProps, {
+  addLike,
+  unLike,
+  deletePost,
+})(PostItem);

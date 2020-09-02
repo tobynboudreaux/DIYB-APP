@@ -12,15 +12,22 @@ const Landing = ({ isAuthenticated }) => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1> DIY-B </h1>
-          <p>
+          <h1 className="x-large"> DIY-B </h1>
+          <p className="lead">
             Do It Yourself-Bookshelf allows you to share DIY Recipes with fellow
             builders and really get to know the community you pour you heart and
             soul into.{" "}
           </p>
-          <div>
-            <Link to="/register"> Sign Up</Link>
-            <Link to="/login"> Login</Link>
+          <br></br>
+          <div className="landing-links">
+            <Link to="/register" className="btn btn-primary">
+              {" "}
+              Sign Up
+            </Link>
+            <Link to="/login" className="btn btn-light">
+              {" "}
+              Login
+            </Link>
           </div>
         </div>
       </div>

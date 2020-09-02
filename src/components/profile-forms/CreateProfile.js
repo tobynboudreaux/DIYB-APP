@@ -45,8 +45,8 @@ const CreateProfile = ({ createProfile, history }) => {
 
   return (
     <Fragment>
-      <h1>Create Your Profile</h1>
-      <p>
+      <h1 className="large text-primary">Create Your Profile</h1>
+      <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
       </p>
@@ -109,12 +109,6 @@ const CreateProfile = ({ createProfile, history }) => {
           </small>
         </div>
         <div className="form-group">
-          <small className="form-text">
-            If you want your latest repos and a Github link, include your
-            username
-          </small>
-        </div>
-        <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"
             name="bio"
@@ -124,10 +118,11 @@ const CreateProfile = ({ createProfile, history }) => {
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
-        <div>
+        <div className="my-2">
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type="button"
+            className="btn btn-light"
           >
             Add Social Network Links
           </button>
@@ -193,8 +188,10 @@ const CreateProfile = ({ createProfile, history }) => {
           </Fragment>
         )}
 
-        <input type="submit" />
-        <Link to="/dashboard">Go Back</Link>
+        <input type="submit" className="btn btn-primary my-1" />
+        <Link className="btn btn-light my-1" to="/dashboard">
+          Go Back
+        </Link>
       </form>
     </Fragment>
   );

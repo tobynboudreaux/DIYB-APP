@@ -1,36 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { addInstructions } from "../../actions/post";
 import { connect } from "react-redux";
-import { addPost } from "../../actions/post";
 
-const PostForm = ({ addPost }) => {
-  const [formData, setText] = useState({
+const AddInstructions = ({ addInstructions, postID }) => {
+  const [formData, setFormData] = useState({
     title: "",
-    text: "",
+    directions: "",
     image: "",
-    tools: "",
-    materials: "",
   });
 
-  const { title, text, image, tools, materials } = formData;
+  const { title, directions, image } = formData;
 
   const onChange = (e) => {
-    setText({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   return (
-    <div className="post-form">
+    <div>
       <div className="bg-primary p">
-        <h3>Say Something... </h3>
+        <h3>Add Instructions to Post... </h3>
       </div>
-      <small>Post your favorite DIY Recipes or just say hello!</small>
       <br></br>
       <small>* = required field</small>
       <form
         className="form my-1"
         onSubmit={(e) => {
           e.preventDefault();
-          addPost(formData);
+          addInstructions(postID, formData);
         }}
       >
         <div className="form-group">
@@ -47,11 +44,11 @@ const PostForm = ({ addPost }) => {
         </div>
         <div className="form-group">
           <textarea
-            name="text"
+            name="directions"
             cols="30"
             rows="5"
-            placeholder="Post text goes here"
-            value={text}
+            placeholder="Directions go here"
+            value={directions}
             onChange={(e) => onChange(e)}
             required
           ></textarea>
@@ -69,33 +66,9 @@ const PostForm = ({ addPost }) => {
         </div>
         <div className="form-group">
           <input
-            type="text"
-            name="tools"
-            placeholder="Tools"
-            value={tools}
-            onChange={(e) => onChange(e)}
-          ></input>
-          <small className="form-text">
-            If this is a recipe, what tools are needed?{" "}
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            name="materials"
-            placeholder="Materials"
-            value={materials}
-            onChange={(e) => onChange(e)}
-          ></input>
-          <small className="form-text">
-            If this is a recipe, what materials are needed?{" "}
-          </small>
-        </div>
-        <div className="form-group">
-          <input
             type="submit"
-            className="btn btn-dark my-1"
             value="Submit"
+            className="btn btn-primary my-1"
           ></input>
         </div>
       </form>
@@ -103,8 +76,8 @@ const PostForm = ({ addPost }) => {
   );
 };
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired,
+AddInstructions.propTypes = {
+  addInstructions: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addPost })(PostForm);
+export default connect(null, { addInstructions })(AddInstructions);

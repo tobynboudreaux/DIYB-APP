@@ -34,8 +34,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <Fragment>
       <section>
-        <h1>Register</h1>
-        <p>
+        <h1 className="large text-primary">Register</h1>
+        <p className="lead">
           <i className="fas fa-user"></i> Create Your Account
         </p>
         <form className="form" onSubmit={(e) => onSubmit(e)}>
@@ -79,9 +79,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" className="btn btn-primary" />
         </form>
-        <p>
+        <p className="my-1">
           Already have an account? <Link to="/login">Sign In</Link>
         </p>
       </section>

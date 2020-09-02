@@ -25,8 +25,8 @@ const AddBoard = ({ addBoard, history }) => {
 
   return (
     <Fragment>
-      <h1>Add A Board</h1>
-      <p>
+      <h1 className="large text-primary">Add A Board</h1>
+      <p className="lead">
         <i className="fas fa-code-branch"></i> Add a Board to hold your saved
         posts in.
       </p>
@@ -52,8 +52,10 @@ const AddBoard = ({ addBoard, history }) => {
             required
           />
         </div>
-        <input type="submit" />
-        <Link to="/dashboard">Go Back</Link>
+        <input type="submit" className="btn btn-primary my-1" />
+        <Link className="btn btn-light my-1" to="/dashboard">
+          Go Back
+        </Link>
       </form>
     </Fragment>
   );

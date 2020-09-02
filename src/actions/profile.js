@@ -8,6 +8,8 @@ import {
   UPDATE_PROFILE,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from "./types";
 
 // Get current users profile
@@ -29,8 +31,6 @@ export const getCurrentProfile = () => async (dispatch) => {
 
 // Get all Profiles
 export const getProfiles = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
-
   try {
     const res = await axios.get("/api/profile");
 
@@ -48,6 +48,7 @@ export const getProfiles = () => async (dispatch) => {
 
 // Get Profile By Id
 export const getProfileById = (userID) => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get(`/api/profile/user/${userID}`);
 
@@ -58,7 +59,7 @@ export const getProfileById = (userID) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.data.errors, status: err.response.status },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -214,5 +215,43 @@ export const deleteAccount = () => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
+  }
+};
+
+// Follow User
+export const followUser = (followeeID) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/follow/user/${followeeID}`);
+
+    dispatch({
+      type: FOLLOW_USER,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("User Followed", "success"));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Unfollow User
+export const unfollowUser = (followeeID) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/follow/unfollow/${followeeID}`);
+
+    dispatch({
+      type: UNFOLLOW_USER,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("User Unfollowed", "success"));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };

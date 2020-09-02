@@ -42,17 +42,7 @@ const EditProfile = ({
       youtube: loading || !profile.social ? "" : profile.social.youtube,
       instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [
-    loading,
-    getCurrentProfile,
-    profile.occupation,
-    profile.website,
-    profile.location,
-    profile.bio,
-    profile.status,
-    profile.skills,
-    profile.social,
-  ]);
+  }, [loading]);
 
   const {
     occupation,
@@ -78,8 +68,8 @@ const EditProfile = ({
 
   return (
     <Fragment>
-      <h1>Create Your Profile</h1>
-      <p>
+      <h1 className="large text-primary">Create Your Profile</h1>
+      <p className="lead">
         <i className="fas fa-user"></i> Let's get some information to make your
         profile stand out
       </p>
@@ -138,7 +128,7 @@ const EditProfile = ({
             onChange={(e) => onChange(e)}
           />
           <small className="form-text">
-            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
+            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP) *
           </small>
         </div>
 
@@ -152,10 +142,11 @@ const EditProfile = ({
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
-        <div>
+        <div className="my-2">
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type="button"
+            className="btn btn-light"
           >
             Add Social Network Links
           </button>
@@ -221,8 +212,10 @@ const EditProfile = ({
           </Fragment>
         )}
 
-        <input type="submit" />
-        <Link to="/dashboard">Go Back</Link>
+        <input type="submit" className="btn btn-primary my-1" />
+        <Link className="btn btn-light my-1" to="/dashboard">
+          Go Back
+        </Link>
       </form>
     </Fragment>
   );

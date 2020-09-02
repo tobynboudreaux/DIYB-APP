@@ -7,6 +7,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   ACCOUNT_DELETED,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -20,6 +22,8 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case USER_LOADED:
+    case FOLLOW_USER:
+    case UNFOLLOW_USER:
       return {
         ...state,
         isAuthenticated: true,

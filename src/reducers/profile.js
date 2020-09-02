@@ -4,6 +4,7 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
+  ADD_TO_BOARD,
 } from "../actions/types";
 
 const initialState = {
@@ -19,6 +20,7 @@ export default function (state = initialState, action) {
   switch (type) {
     case GET_PROFILE:
     case UPDATE_PROFILE:
+    case ADD_TO_BOARD:
       return {
         ...state,
         profile: payload,
@@ -41,9 +43,9 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: null,
-        repos: [],
         loading: false,
       };
+
     default:
       return state;
   }

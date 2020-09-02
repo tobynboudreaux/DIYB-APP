@@ -12,15 +12,15 @@ const ProfileTop = ({
   },
 }) => {
   return (
-    <div>
-      <img src={avatar} alt={name} />
-      <h1>{name}</h1>
-      <p>{status && <span>{status}</span>}</p>
+    <div className="profile-top bg-primary p-2">
+      <img src={avatar} alt={name} className="round-img my-1" />
+      <h1 className="large">{name}</h1>
+      <p className="lead">{status && <span>{status}</span>}</p>
       <p>
         {occupation && <span>{occupation}</span>}{" "}
         {location && <span> in {location}</span>}
       </p>
-      <div>
+      <div className="icons my-1">
         {website && (
           <a href={website} target="_blank" rel="noopener noreferrer">
             <i className="fas fa-globe fa-2x" />
