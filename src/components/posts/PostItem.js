@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { addLike, unLike, deletePost } from "../../actions/post";
 import AddToBoard from "./AddToBoard";
 import AddInstructions from "./AddInstructions";
+import Instructions from "./Instructions";
 import Spinner from "../layout/Spinner";
 
 const PostItem = ({
@@ -13,11 +14,27 @@ const PostItem = ({
   unLike,
   deletePost,
   auth,
-  post: { loading, _id, text, name, avatar, user, likes, comments, date },
+  post: {
+    loading,
+    _id,
+    title,
+    text,
+    image,
+    tools,
+    materials,
+    instructions,
+    name,
+    avatar,
+    user,
+    likes,
+    comments,
+    date,
+  },
   showActions,
   profile,
 }) => {
   const [showInst, toggleInst] = useState(false);
+  const [display, toggleDisplay] = useState(false);
 
   return loading ? (
     <Spinner />
@@ -30,7 +47,29 @@ const PostItem = ({
         </Link>
       </div>
       <div>
+        <h2 className="my-1">{title}</h2>
         <p className="my-1">{text}</p>
+        <img className="post-image" src={image} alt="" />
+        {tools && (
+          <p className="my-1">
+            <i className="fas fa-tools"></i> Tools: {tools}
+          </p>
+        )}{" "}
+        {materials && (
+          <p className="my-1">
+            <i className="fas fa-tree"></i> Materials: {materials}
+          </p>
+        )}
+        {instructions.length > 0 && (
+          <ul>
+            <i className="fas fa-map"></i> Instructions:
+            <Instructions
+              instructions={instructions}
+              display={display}
+              toggleDisplay={toggleDisplay}
+            />
+          </ul>
+        )}
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
@@ -38,7 +77,9 @@ const PostItem = ({
           <Fragment>
             <button className="btn btn-light" onClick={(e) => addLike(_id)}>
               <i className="fas fa-thumbs-up" />
-              {likes.length > 0 && <span text-light>{likes.length}</span>}
+              {likes.length > 0 && (
+                <span className="text-light">{likes.length}</span>
+              )}
             </button>
             <button className="btn btn-light" onClick={(e) => unLike(_id)}>
               <i className="fas fa-thumbs-down" />

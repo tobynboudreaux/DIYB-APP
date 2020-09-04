@@ -23,7 +23,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, history }) => {
         </Link>
       </li>
       <li>
-        <a onClick={(e) => logout(history)}>
+        <a onClick={(e) => logout(history)} style={{ cursor: "pointer" }}>
           <i className="fas fa-sign-out-alt"></i> Logout
         </a>
       </li>

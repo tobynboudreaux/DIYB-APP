@@ -15,7 +15,7 @@ const SavedPosts = ({ boardID, savedPost, deletePostFromBoard, posts }) => {
   postInfo = postInfo[0];
 
   return (
-    <div className="saved-posts-column">
+    <div key={postInfo._id} className="saved-posts-column">
       <div className="saved-post">
         <Link to={`/posts/${post}`} className="board-links">
           {postInfo.title}

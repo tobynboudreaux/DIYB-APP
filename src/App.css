@@ -24,8 +24,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
-a {
+cd .. a {
   color: var(--primary-color);
   text-decoration: none;
 }
@@ -41,6 +40,8 @@ img {
 
 .dashboard {
   grid-area: top;
+  min-width: 1100px;
+  min-height: 1100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,15 +49,25 @@ img {
   text-align: center;
 }
 
+.dashboard ul {
+  background: var(--light-color);
+  color: var(--dark-color);
+  min-width: 2500px;
+  padding: 0.1rem 0.2rem;
+  border-radius: 5px;
+  font-size: 1.6rem;
+}
+
+.dashboard
+
 /* Profiles */
 .profile {
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
-  align-items: center;
+  grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
-  padding: 1rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  justify-items: center;
+  justify-content: center;
+  background: var(--light-color);
 }
 
 .profile-grid {
@@ -73,12 +84,12 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
-.profile-top img {
-  width: 250px;
+.profile-top-img {
+  width: 300px;
+  align-content: center;
+  border-radius: 50%;
 }
 
 .profile-top .icons a {
@@ -100,6 +111,10 @@ img {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.profile-about-img {
+  width: 250px;
 }
 
 .board-links {
@@ -133,7 +148,7 @@ img {
 }
 
 .post img {
-  width: 100px;
+  width: 350px;
 }
 
 .post .comment-count {
@@ -284,7 +299,7 @@ button {
 
 /* Utilities */
 .container {
-  max-width: 1100px;
+  min-width: 1100px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
