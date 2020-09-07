@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Follower = ({ follower, users }) => {
   const { user } = follower;
@@ -9,7 +10,9 @@ const Follower = ({ follower, users }) => {
   console.log(followers, followerInfo, users, follower);
   return (
     <div>
-      <p>{followerInfo && followerInfo.name}</p>
+      {followerInfo && (
+        <Link to={`/profile/${followerInfo._id}`}>{followerInfo.name}</Link>
+      )}{" "}
     </div>
   );
 };
