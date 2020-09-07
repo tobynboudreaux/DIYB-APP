@@ -15,8 +15,7 @@ const Landing = ({ isAuthenticated }) => {
           <h1 className="x-large"> DIY-B </h1>
           <p className="lead">
             Do It Yourself-Bookshelf allows you to share DIY Recipes with fellow
-            builders and really get to know the community you pour you heart and
-            soul into.{" "}
+            builders and really get to know the community.{" "}
           </p>
           <br></br>
           <div className="landing-links">

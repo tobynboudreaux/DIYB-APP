@@ -34,6 +34,8 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User
 export const register = ({ name, email, password }) => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+
   const config = {
     headers: {
       "Content-type": "application/json",
@@ -65,6 +67,8 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
 // Login user
 export const login = (email, password) => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+
   const config = {
     headers: {
       "Content-type": "application/json",

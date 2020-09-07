@@ -10,7 +10,7 @@ const Board = ({ board, deleteBoard, posts }) => {
       <h2>{board.title}</h2>
       <p>{board.description}</p>
       {board.saved_posts.map((post) => (
-        <div className="saved-posts-grid">
+        <div className="saved-posts-row">
           <SavedPosts
             savedPost={post}
             key={post._id}

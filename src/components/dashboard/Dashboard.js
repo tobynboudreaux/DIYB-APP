@@ -1,25 +1,38 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import DashboardActions from "./DashboardActions";
 import Board from "./Board";
-import { getCurrentProfile, deleteAccount } from "../../actions/profile";
+import {
+  getCurrentProfile,
+  deleteAccount,
+  getProfiles,
+} from "../../actions/profile";
 import { getPosts } from "../../actions/post";
+import Follower from "./Follower";
+import Followee from "./Followee";
 
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
   auth: { user },
-  profile: { profile, loading },
+  profile: { profile, profiles, loading },
   getPosts,
+  getProfiles,
   post: { posts },
 }) => {
   useEffect(() => {
-    getCurrentProfile() && getPosts();
-  }, [getCurrentProfile, getPosts]);
-  console.log(user);
+    getCurrentProfile() && getPosts() && getProfiles();
+  }, [getCurrentProfile, getPosts, getProfiles]);
+  const [followerDisplay, toggleDisplay1] = useState(false);
+  const [followeeDisplay, toggleDisplay2] = useState(false);
+
+  const users = profiles.map((profile) => {
+    return profile.user;
+  });
+
   return loading && profile === null ? (
     <Spinner />
   ) : (
@@ -31,24 +44,61 @@ const Dashboard = ({
         </p>
 
         <div className="follow">
-          <p className="my-3">
+          <p className="my-3" onClick={(e) => toggleDisplay1(!followerDisplay)}>
             {user.followers && user.followers.length === 0
               ? "no followers"
               : `${user.followers.length} followers`}
           </p>
 
-          <p className="my-3">
+          {followerDisplay && (
+            <div className="modal">
+              <div className="modal-content">
+                {" "}
+                <p>Followers</p>
+                {user.followers.map((p) => (
+                  <Follower follower={p} key={p._id} users={users} />
+                ))}
+                <button
+                  className="btn btn-light"
+                  onClick={(e) => toggleDisplay1(!followerDisplay)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
+
+          <p className="my-3" onClick={(e) => toggleDisplay2(!followeeDisplay)}>
             {user.followees && user.followees.length === 0
-              ? "no following"
+              ? "no followees"
               : `${user.followees.length} following`}
           </p>
+
+          {followeeDisplay && (
+            <div className="modal">
+              <div className="modal-content">
+                {" "}
+                <p>Followees</p>
+                {user.followees.map((p) => (
+                  <Followee followee={p} key={p._id} users={users} />
+                ))}
+                <button
+                  className="btn btn-light"
+                  onClick={(e) => toggleDisplay2(!followeeDisplay)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {profile !== null ? (
           <Fragment>
             <DashboardActions />
-            <Board board={profile.boards} posts={posts} />
-
+            <div className="boards">
+              <Board board={profile.boards} posts={posts} />
+            </div>
             <div className="my-2">
               <button
                 className="btn btn-danger"
@@ -79,6 +129,7 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired,
   getPosts: PropTypes.func.isRequired,
   post: PropTypes.object.isRequired,
+  getProfiles: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -91,4 +142,5 @@ export default connect(mapStateToProps, {
   getCurrentProfile,
   deleteAccount,
   getPosts,
+  getProfiles,
 })(Dashboard);

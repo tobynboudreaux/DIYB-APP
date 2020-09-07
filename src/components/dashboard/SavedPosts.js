@@ -15,23 +15,31 @@ const SavedPosts = ({ boardID, savedPost, deletePostFromBoard, posts }) => {
   postInfo = postInfo[0];
 
   return (
-    <div key={postInfo._id} className="saved-posts-column">
+    <div key={postInfo && postInfo._id} className="saved-posts-column">
       <div className="saved-post">
         <Link to={`/posts/${post}`} className="board-links">
-          {postInfo.title}
+          {postInfo && postInfo.title}
         </Link>
         <img
           onClick={(e) => toggleDisplay(!display)}
-          src={postInfo.image}
+          src={postInfo && postInfo.image}
           alt=""
         ></img>
 
         {display && (
           <div className="modal">
             <div className="modal-content">
-              <div className="post p-1 my-1">
+              <div
+                style={{
+                  textAlign: "center",
+                  background: "var(--light-color)",
+                }}
+              >
                 <div>
-                  <p className="my-1">{postInfo.text}</p>
+                  <p className="my-1">{postInfo && postInfo.text}</p>
+                  <Link to={`/posts/${post}`} className="board-links">
+                    {postInfo && postInfo.title}
+                  </Link>
                 </div>
               </div>
 
