@@ -16,6 +16,11 @@ const AddInstructions = ({ addInstructions, postID }) => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   return (
     <div>
       <div className="bg-primary p">
@@ -28,6 +33,7 @@ const AddInstructions = ({ addInstructions, postID }) => {
         onSubmit={(e) => {
           e.preventDefault();
           addInstructions(postID, formData);
+          refreshPage();
         }}
       >
         <div className="form-group">

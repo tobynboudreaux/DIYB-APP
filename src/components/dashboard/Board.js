@@ -15,6 +15,7 @@ const Board = ({ board, deleteBoard, posts }) => {
             savedPost={post}
             key={post._id}
             board={board}
+            boardID={board._id}
             posts={posts}
           />
         </div>
